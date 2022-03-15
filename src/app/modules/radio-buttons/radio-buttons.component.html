@@ -1,0 +1,32 @@
+<div class="container">
+	<div class="row justify-content-md-center mt-4">
+		<div class="col-4 menu-container p-3">
+			<form [formGroup]="menuForm">
+				<fieldset class="form-group mb-3" *ngFor="let menu of menus; let i = index">
+					<div class="row">
+						<legend class="col-form-label col-sm-12 pt-0">{{ i+1 | ordinal }} Menu</legend>
+						<div class="col-sm-12">
+							<div class="form-check" *ngFor="let choice of menu; let j = index">
+          			<input [formControlName]="'menu-'+(i+1)" class="form-check-input" type="radio" 
+          			[id]="choice.id" 
+          			[value]="choice.id"
+          			[attr.disabled]="isCompatible(choice.id!, i)"
+          			[checked]="isCompatible(choice.id!, i)"
+          			(change)="resetChoices(i+1)">
+          			<label class="form-check-label" [for]="choice.id">
+            			{{choice.value}}
+          			</label>
+        			</div>
+						</div>
+					</div>
+				</fieldset>
+
+				<div class="form-group row">
+			    <div class="col-sm-12 float-end">
+			      <button type="button" class="btn btn-primary float-end" [disabled]="IsValid" (click)="onSubmit()">Send</button>
+			    </div>
+		  	</div>
+			</form>
+		</div>
+	</div>
+</div>

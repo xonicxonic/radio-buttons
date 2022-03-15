@@ -1,27 +1,75 @@
-# RadioButtons
+# Radio Buttons
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.2.
+Create an interactive and dynamic HTML form in JavaScript***.  The form should render multiple groups of radio buttons.
 
-## Development server
+_***You are welcome to solve the problem using vanilla ES5/6/7, TypeScript, React, Vue or Angular. Feel free to use your own tools or libraries that you like._
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Add a submit button at the bottom that is only enabled when a valid option from all groups has been selected.
 
-## Code scaffolding
+Please showcase your use of semantic HTML and modern CSS.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
+The radio-button groups should be dynamically rendered based on the following data, which you can imagine has come back from an API response:
 
-## Build
+```javascript
+{
+  menus: [
+    // first group of radio-buttons
+    [
+      { id: '101', value: 'Vegetarian' },
+      { id: '102', value: 'Nut allergy' },
+      { id: '103', value: 'Halal' }
+    ],
+    // second group of radio-buttons
+    [
+      { id: '201', value: 'Cashew chicken' },
+      { id: '202', value: 'Sweet and sour pork' },
+      { id: '203', value: 'Stir fried Tofu' },
+      { id: '204', value: 'Vegetable fried rice' },
+      { id: '205', value: 'Pad Thai' },
+      { id: '206', value: 'Massaman beef' },
+    ],
+    // third group of radio-buttons
+    [
+      { id: '301', value: 'Peanut sauce' },
+      { id: '302', value: 'Oyster sauce' },
+      { id: '303', value: 'Vegetable spring rolls' },
+      { id: '304', value: 'Steamed rice' },
+    ],
+  ],
+  rules: {
+    // 'Vegetarian' is NOT compatible with 'Cashew chicken', 'Sweet and sour pork', 'Massaman beef', 'Oyster sauce'
+    101: [201, 202, 206, 302], 
+    // 'Nut allergy' is NOT compatible with 'Cashew chicken', 'Peanut sauce',
+    102: [201, 301], 
+    // 'Halal' is NOT compatible with 'Sweet and sour pork',
+    103: [202], 
+    // 'Vegetable fried rice' is NOT compatible with 'Steamed rice' (you don't need more rice... carb overload),
+    204: [304],
+    // 'Pad thai' is NOT compatible with 'Steamed rice' (Pad thai comes with noodles),
+    205: [304],
+  }
+}
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Initially, only items from the first group are able to be selected. Inputs in subsequent groups are to be initially disabled.
 
-## Running unit tests
+When an item from the first group is selected, valid items from the next group are enabled.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Valid items are specified in the set of rules.  This is an object where the key is the ID of an option, and the value is an array containing the IDs of options which are NOT compatible.
 
-## Running end-to-end tests
+Items groups should remain disabled until an item in the previous group is selected.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Evaluation
+Feel free to ask your tester any questions you need to ask if need be, or if you need any clarification on the requirements.
 
-## Further help
+When complete, create a private repository in GitHub and invite these users to access your repo: `jablooo`, `johrycelfernandez`, `lambrosphotios`.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+We will evaluate your response based on the following criteria:
+
+* Problem solving and design approach.
+* Architectural approach / programming paradigms used. We preference a functional/immutable style; while you don't have to follow this, you're encouraged to show off these skills if you are familiar with them.  Keeping consistency within whatever paradigm you use is, however, important.
+* Best practices within the chosen frame.
+* Consistency in style, readability, naming conventions.
+* Code should be easy to read and understand.  Self-explanitory variable/function/method names, with little to no comments required.
+* Reduce code duplication, minimise nested indentation (ie pyramids of doom); prefer use of abstracting functionality.
